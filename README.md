@@ -1,3 +1,36 @@
+# Portfolio (Next.js + Tailwind)
+
+## Quick start
+
+```bash
+npm install
+npm run dev
+```
+
+## Edit konten
+
+- Data utama ada di `src/data/portfolio.ts` (nama, title, about, skills, experience, achievements, projects, sosial media).
+
+## Asset yang perlu kamu sediakan
+
+- **Foto profil**: ganti placeholder di Hero (saat ini masih `div` placeholder).
+- **CV PDF**: taruh file di `public/cv.pdf` supaya tombol **Download CV** berfungsi.
+- **Screenshot project**: saat ini galeri masih placeholder; nanti bisa kamu sambungkan ke image di `public/` (mis. `public/projects/project-1/1.png`, dll).
+
+## EmailJS (contact form)
+
+1. Copy `.env.example` → `.env.local`
+2. Isi:
+   - `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+   - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+   - `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
+
+Field yang dikirim:
+- `name`
+- `from_email`
+- `message`
+- `to_email`
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
