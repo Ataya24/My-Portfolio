@@ -154,7 +154,7 @@ export const projects: Project[] = [
     id: "project-6",
     title: "Perombakan Website Resmi SMK Telekomunikasi Telesandi Bekasi",
     description:
-      "Perombakan website resmi SMK Telekomunikasi Telesandi Bekasi yang dikerjakan oleh Saya tim Saya dan bertujuan untuk memperbarui tampilan serta meningkatkan fungsionalitas website sekolah.",
+      "Perombakan website resmi SMK Telekomunikasi Telesandi Bekasi yang dikerjakan oleh saya tim saya dan bertujuan untuk memperbarui tampilan serta meningkatkan fungsionalitas website sekolah.",
     tools: ["Laravel", "Tailwind CSS"],
     screenshots: [
       { label: "Screenshot 1", src: "/web-smk-telesandi (1).webp" },
