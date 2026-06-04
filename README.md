@@ -13,9 +13,9 @@ npm run dev
 
 ## Asset yang perlu kamu sediakan
 
-- **Foto profil**: ganti placeholder di Hero (saat ini masih `div` placeholder).
-- **CV PDF**: taruh file di `public/cv.pdf` supaya tombol **Download CV** berfungsi.
-- **Screenshot project**: saat ini galeri masih placeholder; nanti bisa kamu sambungkan ke image di `public/` (mis. `public/projects/project-1/1.png`, dll).
+- **Foto profil**.
+- **CV PDF**: letakkan file di `public/cv.pdf` supaya tombol **Download CV** berfungsi.
+- **Screenshot project**: letakkan di `public/`.
 
 ## EmailJS (contact form)
 
