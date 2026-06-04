@@ -26,11 +26,11 @@ export type Achievement = {
 
 export const profile = {
   name: "Ataya Nafis Rizqulah",
-  title: "Front End Enthusiast | Website Developer | Desktop Developer",
+  title: "Front End Enthusiast | Website Developer | Desktop Application Developer",
   tagline:
     "Creating responsive web solutions with clean design and reliable functionality.",
   about:
-    "Saya memiliki ketertarikan pada pengembangan website & desktop, baik di sisi Front End maupun Back End. Menggunakan teknologi seperti Laravel, PHP, Node.js, React, Next.js, Tailwind CSS, My SQL dan Visual Basic untuk membangun aplikasi yang responsif, fungsional, serta user friendly. Saya senang mempelajari teknologi baru, kerjasama tim/individu, serta terus mengembangkan skill dalam menciptakan solusi digital yang efektif dan mudah digunakan.",
+    "Saya memiliki ketertarikan pada pengembangan aplikasi web dan desktop dengan pengalaman menggunakan Laravel, PHP, Node.js, TypeScript, React, Next.js, Tailwind CSS, Bootstrap, Visual Basic, MySQL, dan Microsoft SQL Server. Dan saya memiliki keahlian untuk membangun aplikasi yang responsif, fungsional, dan sesuai pada kebutuhan pengguna. Saya terus mengembangkan kemampuan diri saya serta kemampuan kerja sama tim untuk menciptakan solusi yang efektif dan berkualitas.",
   email: "atayanafisrizqulah@gmail.com",
   photo: "/Me_.webp",
   socials: {
