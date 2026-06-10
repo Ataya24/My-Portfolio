@@ -10,6 +10,12 @@ import { SkillPill } from "@/components/SkillPill";
 import { Timeline } from "@/components/Timeline";
 import { achievements, experiences, profile, projects, skills, type Project } from "@/data/portfolio";
 
+const emailjsConfig = {
+  serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_jje1ps6",
+  templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_nzp89n3",
+  publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "ClkR2bRgIYk9mvLZX",
+};
+
 function ExternalLink({ href, children }: { href: string; children: ReactNode }) {
   return (
     <a
@@ -43,11 +49,9 @@ export default function HomePage() {
     [],
   );
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function sendMessage(form: HTMLFormElement) {
     setStatus(null);
 
-    const form = e.currentTarget;
     const fd = new FormData(form);
     const name = String(fd.get("name") ?? "").trim();
     const fromEmail = String(fd.get("email") ?? "").trim();
@@ -59,14 +63,12 @@ export default function HomePage() {
       return;
     }
 
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+    const { serviceId, templateId, publicKey } = emailjsConfig;
 
     if (!serviceId || !templateId || !publicKey) {
       setStatus({
         type: "err",
-        msg: "EmailJS belum dikonfigurasi. Isi env: NEXT_PUBLIC_EMAILJS_SERVICE_ID/TEMPLATE_ID/PUBLIC_KEY.",
+        msg: "EmailJS belum dikonfigurasi. Isi env: NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, dan NEXT_PUBLIC_EMAILJS_PUBLIC_KEY.",
       });
       return;
     }
@@ -92,6 +94,11 @@ export default function HomePage() {
     } finally {
       setSending(false);
     }
+  }
+
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    void sendMessage(e.currentTarget);
   }
 
   useEffect(() => {
