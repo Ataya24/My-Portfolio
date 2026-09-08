@@ -34,9 +34,9 @@ export const profile = {
   email: "atayanafisrizqulah@gmail.com",
   photo: "/Me_.webp",
   socials: {
-    instagram: "https://tinyurl.com/2n2kree2",
+    instagram: "https://www.instagram.com/taynfsrzqlh/",
     discord: "https://discord.com/users/a.n.r",
-    linkedin: "https://tinyurl.com/588cptym",
+    linkedin: "https://www.linkedin.com/in/ataya-nafis-rizqulah/",
     github: "https://github.com/Ataya24",
   },
 } as const;
@@ -53,58 +53,12 @@ export const projects: Project[] = [
       { label: "Screenshot 2", src: "/vendor-management-2.webp" },
     ],
   },
+
   {
     id: "project-2",
-    title: "Purchase Order",
-    description:
-      "Sebuah website yang berfungsi untuk mengelola proses pencatatan barang masuk & keluar, termasuk pengelolaan data supplier dengan 2 hak akses (Admin & Produksi).",
-    tools: ["Laravel", "Bootstrap", "MySQL"],
-    screenshots: [
-      { label: "Screenshot 1", src: "/purchase-order (1).webp" },
-      { label: "Screenshot 2", src: "/purchase-order (2).webp" },
-      { label: "Screenshot 3", src: "/purchase-order (3).webp" },
-      { label: "Screenshot 4", src: "/purchase-order (4).webp" },
-      { label: "Screenshot 5", src: "/purchase-order (5).webp" },
-      { label: "Screenshot 6", src: "/purchase-order (6).webp" },
-      { label: "Screenshot 7", src: "/purchase-order (7).webp" },
-      { label: "Screenshot 8", src: "/purchase-order (8).webp" },
-      { label: "Screenshot 9", src: "/purchase-order (9).webp" },
-      { label: "Screenshot 10", src: "/purchase-order (10).webp" },
-      { label: "Screenshot 11", src: "/purchase-order (11).webp" },
-      { label: "Screenshot 12", src: "/purchase-order (12).webp" },
-      { label: "Screenshot 13", src: "/purchase-order (13).webp" },
-      { label: "Screenshot 14", src: "/purchase-order (14).webp" },
-      { label: "Screenshot 15", src: "/purchase-order (15).webp" },
-      { label: "Screenshot 16", src: "/purchase-order (16).webp" },
-    ],
-  },
-  
-  {
-    id: "project-3",
-    title: "Sistem Pemesanan Teknopro",
-    description:
-      "Website  sistem pemesanan Teknopro yang bertujuan untuk memudahkan perusahaan dalam mengelola pemesanan dari vendor. Aplikasi ini memungkinkan pihak perusahaan untuk membuat, mengedit, dan menghapus pemesanan dengan mudah, serta menyediakan fitur untuk melihat riwayat pemesanan dan statusnya.",
-    tools: ["Laravel", "MySQL"],
-    screenshots: [
-      { label: "Screenshot 1", src: "/sistem-pemesanan (1).webp" },
-      { label: "Screenshot 2", src: "/sistem-pemesanan (2).webp" },
-      { label: "Screenshot 3", src: "/sistem-pemesanan (3).webp" },
-      { label: "Screenshot 4", src: "/sistem-pemesanan (4).webp" },
-      { label: "Screenshot 5", src: "/sistem-pemesanan (5).webp" },
-      { label: "Screenshot 6", src: "/sistem-pemesanan (6).webp" },
-      { label: "Screenshot 7", src: "/sistem-pemesanan (7).webp" },
-      { label: "Screenshot 8", src: "/sistem-pemesanan (8).webp" },
-      { label: "Screenshot 9", src: "/sistem-pemesanan (9).webp" },
-      { label: "Screenshot 10", src: "/sistem-pemesanan (10).webp" },
-      { label: "Screenshot 11", src: "/sistem-pemesanan (11).webp" },
-      { label: "Screenshot 12", src: "/sistem-pemesanan (12).webp" },
-    ],
-  },
-  {
-    id: "project-4",
     title: "Integration Tracker App",
     description:
-      "Website Integration Tracker App yang bertujuan untuk membuat serta memudahkan pencatatan proses pembuatan suatu proyek",
+      "Website Integration Tracker App yang bertujuan untuk membuat serta memudahkan pencatatan proses pembuatan proyek yang diperuntukan tempat intern saya.",
     tools: ["Laravel", "MySQL"],
     screenshots: [
       { label: "Screenshot 1", src: "/login-integration.webp" },
@@ -124,7 +78,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "project-5",
+    id: "project-3",
     title: "Company Profile PT TEKNOPRO SUKSES PERSADA",
     description:
       "Website company profile untuk PT TEKNOPRO SUKSES PERSADA yang bertujuan untuk memberikan informasi tentang perusahaan, termasuk profil perusahaan, layanan yang ditawarkan, portofolio proyek, kontak, dan alamat.",
@@ -151,7 +105,7 @@ export const projects: Project[] = [
   },
 
   {
-    id: "project-6",
+    id: "project-4",
     title: "Perombakan Website Resmi SMK Telekomunikasi Telesandi Bekasi",
     description:
       "Perombakan website resmi SMK Telekomunikasi Telesandi Bekasi yang dikerjakan oleh saya tim saya dan bertujuan untuk memperbarui tampilan serta meningkatkan fungsionalitas website sekolah.",
@@ -187,10 +141,8 @@ export const skills: { name: string; level: SkillLevel }[] = [
   { name: "C#", level: "Beginner" },
   { name: "MySQL", level: "Intermediate" },
   { name: "Microsoft SQL Server", level: "Intermediate" },
-  {name: "Git", level: "Intermediate" },
-  { name: "Ms Excel", level: "Intermediate" },
-  { name: "Ms Powerpoint", level: "Intermediate" },
-  { name: "Ms Word", level: "Advanced" },
+  { name: "Git", level: "Intermediate" },
+  { name: "Ms Office", level: "Intermediate" },
   { name: "Figma", level: "Beginner" },
 ];
 
@@ -222,8 +174,8 @@ export const experiences: ExperienceItem[] = [
     title: "Lecture & Deputy",
     org: "English Club SMK Telekomunikasi Telesandi",
     period: "2024 — 2025",
-    bullets: ["Membantu pelaksanaan kegiatan agar terlaksana dengan baik.", 
-      "Menjadi seksi dokumentasi setiap kegiatan.", 
+    bullets: ["Membantu pelaksanaan kegiatan agar terlaksana dengan baik.",
+      "Menjadi seksi dokumentasi setiap kegiatan.",
       "Menjadi Pemateri dan wakil dalam aktivitas pelaksanaan kegiatan Ekstrakurikuler English Club."],
   },
 ];
