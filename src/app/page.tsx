@@ -7,7 +7,8 @@ import { ProjectModal } from "@/components/ProjectModal";
 import { Section } from "@/components/Section";
 import { SkillPill } from "@/components/SkillPill";
 import { Timeline } from "@/components/Timeline";
-import { achievements, experiences, profile, projects, skills, type Project } from "@/data/portfolio";
+import { profile, skills, type Project } from "@/data/portfolio";
+import { useLocale } from "@/lib/locale-context";
 
 const emailjsConfig = {
   serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_jje1ps6",
@@ -50,6 +51,7 @@ function GitHubIcon({ className = "h-5 w-5" }: { className?: string }) {
 }
 
 export default function HomePage() {
+  const { t, projects, experiences, achievements, about, tagline } = useLocale();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -99,7 +101,7 @@ export default function HomePage() {
     const message = String(fd.get("message") ?? "").trim();
 
     if (!name || !fromEmail || !message) {
-      setStatus({ type: "err", msg: "Mohon lengkapi semua field." });
+      setStatus({ type: "err", msg: t.contact.errRequired });
       return;
     }
 
@@ -108,7 +110,7 @@ export default function HomePage() {
     if (!serviceId || !templateId || !publicKey) {
       setStatus({
         type: "err",
-        msg: "EmailJS belum dikonfigurasi. Isi env: NEXT_PUBLIC_EMAILJS_SERVICE_ID, NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, dan NEXT_PUBLIC_EMAILJS_PUBLIC_KEY.",
+        msg: t.contact.errNotConfigured,
       });
       return;
     }
@@ -128,9 +130,9 @@ export default function HomePage() {
         { publicKey },
       );
       form.reset();
-      setStatus({ type: "ok", msg: "Pesan terkirim. Terima kasih!" });
+      setStatus({ type: "ok", msg: t.contact.okSent });
     } catch {
-      setStatus({ type: "err", msg: "Gagal mengirim pesan. Coba lagi ya." });
+      setStatus({ type: "err", msg: t.contact.errSend });
     } finally {
       setSending(false);
     }
@@ -168,6 +170,7 @@ export default function HomePage() {
         <section id="home" className="scroll-mt-24">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-18 md:grid-cols-2">
             <div>
+              {/* Static by design: title and name stay untranslated. */}
               <p className="text-sm font-semibold uppercase tracking-wide text-foreground/60">
                 {profile.title}
               </p>
@@ -175,7 +178,7 @@ export default function HomePage() {
                 {profile.name}
               </h1>
               <p className="mt-4 max-w-xl text-base leading-7 text-foreground/75 sm:text-lg sm:leading-8">
-                {profile.tagline}
+                {tagline}
               </p>
 
               <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -183,7 +186,7 @@ export default function HomePage() {
                   href="#projects"
                   className="rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition-all duration-200 active:scale-95"
                 >
-                  Lihat Projects
+                  {t.hero.viewProjects}
                 </a>
                 <a
                   href="/CV.pdf"
@@ -191,13 +194,13 @@ export default function HomePage() {
                   className="rounded-xl border border-black/10 bg-card px-4 py-2.5 text-sm font-semibold hover:bg-black/5"
                   download
                 >
-                  Download CV (PDF)
+                  {t.hero.downloadCv}
                 </a>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-foreground/70">
                 <span>
-                  Email:{" "}
+                  {t.hero.email}:{" "}
                   <a className="font-medium text-foreground hover:underline" href={`mailto:${profile.email}`}>
                     {profile.email}
                   </a>
@@ -210,12 +213,12 @@ export default function HomePage() {
                 {profile.photo ? (
                   <img
                     src={profile.photo}
-                    alt={`Foto ${profile.name}`}
+                    alt={`${t.hero.photoAlt} ${profile.name}`}
                     className="h-full w-full object-cover"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-sm text-foreground/60 bg-black/5">
-                    Foto kamu (placeholder)
+                    {t.hero.photoPlaceholder}
                   </div>
                 )}
               </div>
@@ -223,17 +226,17 @@ export default function HomePage() {
           </div>
         </section>
 
-        <Section id="about" title="About Me">
+        <Section id="about" title={t.sections.about}>
           <div className="rounded-2xl border border-black/10 bg-card p-6 sm:p-8">
-            <p className="max-w-3xl text-sm leading-7 text-foreground/80 sm:text-base sm:leading-8 text-justify">
-              {profile.about}
+            <p className="text-sm leading-7 text-foreground/80 sm:text-base sm:leading-8 text-justify">
+              {about}
             </p>
           </div>
         </Section>
 
         <Section
           id="projects"
-          title="Projects"
+          title={t.sections.projects}
         >
           <div className="grid gap-4 sm:grid-cols-2">
             {projects.map((p) => (
@@ -247,12 +250,12 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {p.tools.map((t) => (
+                  {p.tools.map((tool) => (
                     <span
-                      key={`${p.id}-${t}`}
+                      key={`${p.id}-${tool}`}
                       className="rounded-full border border-black/10 bg-background px-2.5 py-1 text-xs font-medium text-foreground/80"
                     >
-                      {t}
+                      {tool}
                     </span>
                   ))}
                 </div>
@@ -265,7 +268,7 @@ export default function HomePage() {
                     }}
                     className="rounded-xl bg-accent px-4 py-2 text-sm font-semibold text-white transition-transform duration-150 ease-out hover:opacity-95 active:scale-[0.98]"
                   >
-                    View details
+                    {t.projects.viewDetails}
                   </button>
                 </div>
               </article>
@@ -273,7 +276,7 @@ export default function HomePage() {
           </div>
         </Section>
 
-        <Section id="skills" title="Skills">
+        <Section id="skills" title={t.sections.skills}>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 lg:grid-cols-3">
             {skills.map((s) => (
               <SkillPill key={s.name} name={s.name} level={s.level} />
@@ -281,11 +284,11 @@ export default function HomePage() {
           </div>
         </Section>
 
-        <Section id="experience" title="Experience">
+        <Section id="experience" title={t.sections.experience}>
           <Timeline items={experiences} />
         </Section>
 
-        <Section id="achievements" title="Achievement">
+        <Section id="achievements" title={t.sections.achievements}>
           <div className="grid gap-4 sm:grid-cols-2">
             {achievements.map((a) => (
               <div key={a.id} className="rounded-2xl border border-black/10 bg-card p-5">
@@ -329,14 +332,14 @@ export default function HomePage() {
 
         <Section
           id="contact"
-          title="Contact"
+          title={t.sections.contact}
         >
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="flex flex-col justify-between rounded-2xl border border-black/10 bg-card p-6">
               <div>
-                <div className="font-heading text-lg font-semibold tracking-tight">Get in touch</div>
+                <div className="font-heading text-lg font-semibold tracking-tight">{t.contact.getInTouch}</div>
                 <p className="mt-2 text-sm leading-6 text-foreground/70">
-                  Kirim pesan lewat form, atau langsung email ke{" "}
+                  {t.contact.introBefore}{" "}
                   <a className="font-medium text-foreground hover:underline" href={`mailto:${profile.email}`}>
                     {profile.email}
                   </a>
@@ -345,7 +348,7 @@ export default function HomePage() {
 
                 <div className="mt-6">
                   <div className="text-xs font-semibold uppercase tracking-wider text-foreground/50 mb-3">
-                    Social Media
+                    {t.contact.socialMedia}
                   </div>
                   <div className="flex flex-wrap items-center gap-3">
                     {socialLinks.map((s) => {
@@ -373,19 +376,19 @@ export default function HomePage() {
             </div>
 
             <form onSubmit={onSubmit} className="rounded-2xl border border-black/10 bg-card p-6">
-              <div className="font-heading text-lg font-semibold tracking-tight">Message</div>
+              <div className="font-heading text-lg font-semibold tracking-tight">{t.contact.messageTitle}</div>
               <div className="mt-4 grid gap-3">
                 <label className="grid gap-1">
-                  <span className="text-sm font-medium">Name</span>
+                  <span className="text-sm font-medium">{t.contact.name}</span>
                   <input
                     name="name"
                     className="h-11 rounded-xl border border-black/10 bg-background px-3 text-sm outline-none focus:border-accent"
-                    placeholder="Nama kamu"
+                    placeholder={t.contact.namePlaceholder}
                     autoComplete="name"
                   />
                 </label>
                 <label className="grid gap-1">
-                  <span className="text-sm font-medium">Email</span>
+                  <span className="text-sm font-medium">{t.contact.email}</span>
                   <input
                     name="email"
                     type="email"
@@ -395,20 +398,20 @@ export default function HomePage() {
                   />
                 </label>
                 <label className="grid gap-1">
-                  <span className="text-sm font-medium">Subject</span>
+                  <span className="text-sm font-medium">{t.contact.subject}</span>
                   <input
                     name="subject"
                     className="h-11 rounded-xl border border-black/10 bg-background px-3 text-sm outline-none focus:border-accent"
-                    placeholder="Subject (optional)"
+                    placeholder={t.contact.subjectPlaceholder}
                   />
                 </label>
                 <label className="grid gap-1">
-                  <span className="text-sm font-medium">Message</span>
+                  <span className="text-sm font-medium">{t.contact.message}</span>
                   <textarea
                     name="message"
                     rows={5}
                     className="resize-none rounded-xl border border-black/10 bg-background px-3 py-2 text-sm outline-none focus:border-accent"
-                    placeholder="Tulis pesan kamu..."
+                    placeholder={t.contact.messagePlaceholder}
                   />
                 </label>
               </div>
@@ -431,7 +434,7 @@ export default function HomePage() {
                 disabled={sending}
                 className="mt-5 inline-flex h-11 items-center justify-center rounded-xl bg-accent px-4 text-sm font-semibold text-white disabled:opacity-60"
               >
-                {sending ? "Sending..." : "Send"}
+                {sending ? t.contact.sending : t.contact.send}
               </button>
             </form>
           </div>
@@ -444,9 +447,9 @@ export default function HomePage() {
                 © {new Date().getFullYear()} {profile.name}
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-foreground/50">CV:</span>
+                <span className="text-foreground/50">{t.footer.cv}</span>
                 <a className="font-medium text-foreground hover:underline" href="/CV.pdf" download target="_blank">
-                  Download PDF
+                  {t.footer.downloadPdf}
                 </a>
               </div>
             </div>
@@ -490,7 +493,7 @@ export default function HomePage() {
               />
 
               <button
-                aria-label="Close"
+                aria-label={t.projects.close}
                 className="absolute top-3 right-3 sm:top-4 sm:right-4 rounded-lg border border-black/10 bg-card px-3 py-1.5 text-sm font-medium text-foreground shadow-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent"
                 onClick={() => {
                   setLightboxOpen(false);

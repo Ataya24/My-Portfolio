@@ -1,4 +1,7 @@
+"use client";
+
 import type { SkillLevel } from "@/data/portfolio";
+import { useLocale } from "@/lib/locale-context";
 
 function levelStyle(level: SkillLevel) {
   switch (level) {
@@ -12,6 +15,7 @@ function levelStyle(level: SkillLevel) {
 }
 
 export function SkillPill({ name, level }: { name: string; level: SkillLevel }) {
+  const { t } = useLocale();
   return (
     <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-black/10 bg-card px-3 py-2 text-sm">
       <div className="font-medium">{name}</div>
@@ -21,9 +25,8 @@ export function SkillPill({ name, level }: { name: string; level: SkillLevel }) 
           levelStyle(level),
         ].join(" ")}
       >
-        {level}
+        {t.skills[level]}
       </span>
     </div>
   );
 }
-

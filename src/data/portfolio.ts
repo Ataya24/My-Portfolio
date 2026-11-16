@@ -28,7 +28,7 @@ export const profile = {
   name: "Ataya Nafis Rizqulah",
   title: "Front End Enthusiast | Website Developer | Desktop Application Developer",
   tagline:
-    "Creating responsive web solutions with clean design and reliable functionality.",
+    "Menciptakan solusi aplikasi yang responsif dengan desain yang bersih dan fungsionalitas yang andal.",
   about:
     "Saya memiliki ketertarikan pada pengembangan aplikasi web dan desktop dengan pengalaman menggunakan Laravel, PHP, Node.js, TypeScript, React, Next.js, Tailwind CSS, Bootstrap, Visual Basic, MySQL, dan Microsoft SQL Server. Dan saya memiliki keahlian untuk membangun aplikasi yang responsif, fungsional, dan sesuai pada kebutuhan pengguna. Saya terus mengembangkan kemampuan diri saya serta kemampuan kerja sama tim untuk menciptakan solusi yang efektif dan berkualitas.",
   email: "atayanafisrizqulah@gmail.com",
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     id: "project-2",
     title: "Integration Tracker App",
     description:
-      "Website Integration Tracker App yang bertujuan untuk membuat serta memudahkan pencatatan proses pembuatan proyek yang diperuntukan tempat intern saya.",
+      "Website Integration Tracker App yang bertujuan untuk membuat serta memudahkan pencatatan proses pembuatan proyek yang diperuntukan perusahaan tempat saya magang.",
     tools: ["Laravel", "MySQL"],
     screenshots: [
       { label: "Screenshot 1", src: "/login-integration.webp" },
@@ -160,7 +160,7 @@ export const experiences: ExperienceItem[] = [
   },
   {
     id: "exp-2",
-    title: "Front End Developer(PKK)",
+    title: "Front End Developer (Produk Kreatif dan Kewirausahaan)",
     org: "SM Dev Creative",
     period: "2024 — 2025",
     bullets: [
@@ -171,7 +171,7 @@ export const experiences: ExperienceItem[] = [
   },
   {
     id: "exp-3",
-    title: "Lecture & Deputy",
+    title: "Pengajar & Wakil Ketua",
     org: "English Club SMK Telekomunikasi Telesandi",
     period: "2024 — 2025",
     bullets: ["Membantu pelaksanaan kegiatan agar terlaksana dengan baik.",

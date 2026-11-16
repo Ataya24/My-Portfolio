@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Project } from "@/data/portfolio";
+import { useLocale } from "@/lib/locale-context";
 
 export function ProjectModal({
   project,
@@ -14,6 +15,7 @@ export function ProjectModal({
   onRequestClose: () => void;
   onClosed?: () => void;
 }) {
+  const { t } = useLocale();
   const closeAnimMs = 300;
   const [idx, setIdx] = useState(0);
   const [entered, setEntered] = useState(false);
@@ -65,7 +67,7 @@ export function ProjectModal({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`${project.title} details`}
+      aria-label={`${project.title} ${t.projects.detailsLabel}`}
       className="fixed inset-0 z-60 flex items-center justify-center p-4"
     >
       <button
@@ -74,7 +76,7 @@ export function ProjectModal({
           "absolute inset-0 bg-black/40 transition-opacity duration-300 ease-out",
           entered ? "opacity-100" : "opacity-0",
         ].join(" ")}
-        aria-label="Close modal"
+        aria-label={t.projects.close}
         onClick={onRequestClose}
       />
 
@@ -146,7 +148,7 @@ export function ProjectModal({
                   disabled={idx === 0}
                   className="rounded-lg border border-black/10 bg-background px-3 py-1.5 text-sm font-medium disabled:opacity-40 hover:bg-black/5 transition-colors"
                 >
-                  ← Prev
+                  ← {t.projects.prev}
                 </button>
                 <div className="text-xs text-foreground/60">
                   {Math.min(idx + 1, shots.length || 1)} / {Math.max(shots.length, 1)}
@@ -157,7 +159,7 @@ export function ProjectModal({
                   disabled={idx >= shots.length - 1}
                   className="rounded-lg border border-black/10 bg-background px-3 py-1.5 text-sm font-medium disabled:opacity-40 hover:bg-black/5 transition-colors"
                 >
-                  Next →
+                  {t.projects.next} →
                 </button>
               </div>
             </div>
@@ -165,7 +167,7 @@ export function ProjectModal({
             {/* Gallery sidebar - lebih compact */}
             <div>
               <div className="text-xs font-semibold uppercase tracking-wide text-foreground/60 mb-2">
-                Gallery
+                {t.projects.gallery}
               </div>
               <div className="grid gap-2 max-h-[280px] overflow-y-auto pr-1">
                 {shots.length ? (
@@ -201,7 +203,7 @@ export function ProjectModal({
                   ))
                 ) : (
                   <div className="rounded-lg border border-black/10 bg-background p-2 text-xs text-foreground/60 text-center">
-                    No screenshots yet
+                    {t.projects.noScreenshots}
                   </div>
                 )}
               </div>

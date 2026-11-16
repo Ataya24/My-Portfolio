@@ -5,7 +5,7 @@ export function Timeline({ items }: { items: ExperienceItem[] }) {
     <ol className="relative ml-3 grid gap-6 border-l border-black/10 pl-6">
       {items.map((it) => (
         <li key={it.id} className="relative">
-          <span className="absolute -left-[30.4px] top-1.5 h-3 w-3 rounded-full bg-accent" />
+          <span className="absolute left-[-30.4px] top-1.5 h-3 w-3 rounded-full bg-accent" />
           <div className="rounded-2xl border border-black/10 bg-card p-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="min-w-0">

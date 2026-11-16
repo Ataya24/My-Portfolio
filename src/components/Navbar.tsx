@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { sections, type SectionId } from "@/lib/sections";
 import { useActiveSection } from "@/lib/useActiveSection";
+import { useLocale } from "@/lib/locale-context";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 function scrollToSection(id: SectionId) {
   const el = document.getElementById(id);
@@ -12,8 +14,12 @@ function scrollToSection(id: SectionId) {
 
 export function Navbar() {
   const { active, setActive } = useActiveSection();
+  const { t } = useLocale();
   const [open, setOpen] = useState(false);
-  const items = useMemo(() => sections, []);
+  const items = useMemo(
+    () => sections.map((s) => ({ id: s.id, label: t.nav[s.id] })),
+    [t],
+  );
   const mobileCloseMs = 300;
 
   useEffect(() => {
@@ -35,72 +41,76 @@ export function Navbar() {
             setActive("home");
             scrollToSection("home");
           }}
-          aria-label="Go to home"
+          aria-label={t.a11y.goHome}
         >
-          Ataya's Portfolio
+          Ataya&apos;s Portfolio
         </button>
 
-        <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
-          {items.map((s) => {
-            const isActive = s.id === active;
-            return (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => {
-                  setActive(s.id);
-                  scrollToSection(s.id);
-                }}
-                className={[
-                  "relative text-[15px] font-medium transition-colors",
-                  isActive ? "text-foreground" : "text-foreground/70 hover:text-foreground",
-                ].join(" ")}
-                aria-current={isActive ? "page" : undefined}
-              >
-                {s.label}
-                <span
-                  aria-hidden="true"
+        <div className="flex items-center gap-3">
+          <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">
+            {items.map((s) => {
+              const isActive = s.id === active;
+              return (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => {
+                    setActive(s.id);
+                    scrollToSection(s.id);
+                  }}
                   className={[
-                    "absolute -bottom-2 left-0 h-0.5 w-full origin-left rounded bg-accent transition-transform",
-                    isActive ? "scale-x-100" : "scale-x-0",
+                    "relative text-[15px] font-medium transition-colors",
+                    isActive ? "text-foreground" : "text-foreground/70 hover:text-foreground",
                   ].join(" ")}
-                />
-              </button>
-            );
-          })}
-        </nav>
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {s.label}
+                  <span
+                    aria-hidden="true"
+                    className={[
+                      "absolute -bottom-2 left-0 h-0.5 w-full origin-left rounded bg-accent transition-transform",
+                      isActive ? "scale-x-100" : "scale-x-0",
+                    ].join(" ")}
+                  />
+                </button>
+              );
+            })}
+          </nav>
 
-        <button
-          type="button"
-          className="relative inline-flex h-12 w-12 items-center justify-center rounded-xl border border-black/10 bg-card md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-          <span
-            aria-hidden="true"
-            className={[
-              "absolute h-0.5 w-6 rounded bg-foreground transition-transform duration-300 ease-out",
-              open ? "translate-y-0 rotate-45" : "-translate-y-2 rotate-0",
-            ].join(" ")}
-          />
-          <span
-            aria-hidden="true"
-            className={[
-              "absolute h-0.5 w-6 rounded bg-foreground transition-all duration-300 ease-out",
-              open ? "opacity-0" : "opacity-100",
-            ].join(" ")}
-          />
-          <span
-            aria-hidden="true"
-            className={[
-              "absolute h-0.5 w-6 rounded bg-foreground transition-transform duration-300 ease-out",
-              open ? "translate-y-0 -rotate-45" : "translate-y-2 rotate-0",
-            ].join(" ")}
-          />
-        </button>
+          <LanguageSwitcher />
+
+          <button
+            type="button"
+            className="relative inline-flex h-12 w-12 items-center justify-center rounded-xl border border-black/10 bg-card md:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? t.a11y.closeMenu : t.a11y.openMenu}
+          >
+            <span className="sr-only">{open ? t.a11y.closeMenu : t.a11y.openMenu}</span>
+            <span
+              aria-hidden="true"
+              className={[
+                "absolute h-0.5 w-6 rounded bg-foreground transition-transform duration-300 ease-out",
+                open ? "translate-y-0 rotate-45" : "-translate-y-2 rotate-0",
+              ].join(" ")}
+            />
+            <span
+              aria-hidden="true"
+              className={[
+                "absolute h-0.5 w-6 rounded bg-foreground transition-all duration-300 ease-out",
+                open ? "opacity-0" : "opacity-100",
+              ].join(" ")}
+            />
+            <span
+              aria-hidden="true"
+              className={[
+                "absolute h-0.5 w-6 rounded bg-foreground transition-transform duration-300 ease-out",
+                open ? "translate-y-0 -rotate-45" : "translate-y-2 rotate-0",
+              ].join(" ")}
+            />
+          </button>
+        </div>
       </div>
 
       <div
@@ -144,4 +154,3 @@ export function Navbar() {
     </header>
   );
 }
-
